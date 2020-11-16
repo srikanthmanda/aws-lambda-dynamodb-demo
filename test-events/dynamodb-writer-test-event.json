@@ -1,0 +1,22 @@
+[
+  {
+    "group": { "S": "ec2" },
+    "resource": { "S": "vpc" },
+    "file": { "S": "ec2-vpc.md" }
+  },
+  {
+    "group": { "S": "ec2" },
+    "resource": { "S": "efs" },
+    "file": { "S": "ec2-efs.md" }
+  },
+  {
+    "group": { "S": "lambda" },
+    "resource": { "S": "function" },
+    "file": { "S": "lambda-function.md" }
+  },
+  {
+    "group": { "S": "lambda" },
+    "resource": { "S": "eventsourcemapping" },
+    "file": { "S": "lambda-eventsourcemapping.md" }
+  }
+]

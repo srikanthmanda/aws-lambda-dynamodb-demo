@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform:
+  - AWS::Serverless-2016-10-31
+
+Description: Lambda Stack
+
+Resources:
+  dynamoDbReader:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Description: Lambda that can read from DynamoDB
+      FunctionName: dynamoDbReader
+      Handler: src/dynamodb-reader.handler
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - DynamoDBReadPolicy:
+            TableName: cloudFormationDocsIndex
+  dynamoDbWriter:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Description: Lambda that can write to DynamoDB
+      FunctionName: dynamoDbWriter
+      Handler: src/dynamodb-writer.handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: cloudFormationDocsIndex
+
+Globals:
+  Function:
+    Runtime: nodejs12.x
+    CodeUri: ../sam-build/dynamodb-lambdas.zip
+    # CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-nasb5bg3gqu9/dynamodb-lambdas/dynamodb-lambdas.zip
+    MemorySize: 256
+    Timeout: 180

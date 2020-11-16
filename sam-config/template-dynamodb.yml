@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform:
+  - AWS::Serverless-2016-10-31
+
+Description: >-
+  DynamoDB Stack
+
+Resources:
+  cloudFormationDocsIndex:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      TableName: cloudFormationDocsIndex
+      AttributeDefinitions:
+        - AttributeName: group
+          AttributeType: S
+        - AttributeName: resource
+          AttributeType: S
+      KeySchema:
+        - AttributeName: group
+          KeyType: HASH
+        - AttributeName: resource
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST

@@ -1,0 +1,126 @@
+[
+	{
+		"Table": {
+			"AttributeDefinitions": [
+				{
+					"AttributeName": "group",
+					"AttributeType": "S"
+				},
+				{
+					"AttributeName": "resource",
+					"AttributeType": "S"
+				}
+			],
+			"TableName": "cloudFormationDocsIndex",
+			"KeySchema": [
+				{
+					"AttributeName": "group",
+					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "resource",
+					"KeyType": "RANGE"
+				}
+			],
+			"TableStatus": "ACTIVE",
+			"CreationDateTime": "2020-11-11T17:32:56.129Z",
+			"ProvisionedThroughput": {
+				"NumberOfDecreasesToday": 0,
+				"ReadCapacityUnits": 5,
+				"WriteCapacityUnits": 5
+			},
+			"TableSizeBytes": 0,
+			"ItemCount": 0,
+			"TableArn": "arn:aws:dynamodb:us-east-1:420138796927:table/cloudFormationDocsIndex",
+			"TableId": "a88988ab-9b83-45c2-a9eb-c45f65ca3d3b"
+		}
+	},
+	{
+		"Item": {
+			"file": {
+				"S": "ec2vpc.md"
+			},
+			"group": {
+				"S": "ec2"
+			},
+			"resource": {
+				"S": "vpc"
+			}
+		}
+	},
+	{
+		"Responses": {
+			"cloudFormationDocsIndex": [
+				{
+					"file": {
+						"S": "ec2vpc.md"
+					},
+					"group": {
+						"S": "ec2"
+					},
+					"resource": {
+						"S": "vpc"
+					}
+				},
+				{
+					"file": {
+						"S": "lambdafunction.md"
+					},
+					"group": {
+						"S": "lambda"
+					},
+					"resource": {
+						"S": "function"
+					}
+				}
+			]
+		},
+		"UnprocessedKeys": {
+		}
+	},
+	{
+		"Items": [
+			{
+				"file": {
+					"S": "lambdafunction.md"
+				},
+				"group": {
+					"S": "lambda"
+				},
+				"resource": {
+					"S": "function"
+				}
+			}
+		],
+		"Count": 1,
+		"ScannedCount": 1
+	},
+	{
+		"Items": [
+			{
+				"file": {
+					"S": "ec2efs.md"
+				},
+				"group": {
+					"S": "ec2"
+				},
+				"resource": {
+					"S": "efs"
+				}
+			},
+			{
+				"file": {
+					"S": "ec2vpc.md"
+				},
+				"group": {
+					"S": "ec2"
+				},
+				"resource": {
+					"S": "vpc"
+				}
+			}
+		],
+		"Count": 2,
+		"ScannedCount": 4
+	}
+]

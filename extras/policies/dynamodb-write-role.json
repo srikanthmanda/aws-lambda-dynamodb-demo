@@ -1,0 +1,15 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:putItem",
+        "dynamodb:deleteItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:updateItem"
+      ],
+      "Resource": "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/cloudFormationDocsIndex"
+    }
+  ]
+}
