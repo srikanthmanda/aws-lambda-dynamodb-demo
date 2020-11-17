@@ -21,3 +21,17 @@ Resources:
         - AttributeName: resource
           KeyType: RANGE
       BillingMode: PAY_PER_REQUEST
+  dynamoDbVpcEndpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      RouteTableIds:
+        - Fn::ImportValue: !Sub "${vpcStackName}-private-route-table-id"
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.dynamodb"
+      VpcId:
+        Fn::ImportValue: !Sub "${vpcStackName}-demo-vpc-id"
+
+Parameters:
+  vpcStackName:
+    Description: Stack name of the demo VPC
+    Type: String
+    Default: lambdas-vpc

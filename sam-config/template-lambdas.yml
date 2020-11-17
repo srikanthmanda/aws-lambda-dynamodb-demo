@@ -32,3 +32,14 @@ Globals:
     # CodeUri: s3://aws-sam-cli-managed-default-samclisourcebucket-nasb5bg3gqu9/dynamodb-lambdas/dynamodb-lambdas.zip
     MemorySize: 256
     Timeout: 180
+    VpcConfig:
+      SecurityGroupIds:
+        - Fn::ImportValue: !Sub "${vpcStackName}-vpc-default-sg-id"
+      SubnetIds:
+        - Fn::ImportValue: !Sub "${vpcStackName}-private-subnet-id"
+
+Parameters:
+  vpcStackName:
+    Description: Stack name of the demo VPC
+    Type: String
+    Default: lambdas-vpc

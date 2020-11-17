@@ -1,0 +1,62 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform:
+  - AWS::Serverless-2016-10-31
+
+Description: VPC Stack
+
+Resources:
+  demoVpc:
+    Type: "AWS::EC2::VPC"
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: demoVpc
+  privateSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: !Ref "AWS::Region"
+      CidrBlock: 10.0.1.0/24
+      Tags:
+        - Key: Name
+          Value: privateSubnet
+      VpcId: !Ref demoVpc
+  privateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref demoVpc
+      Tags:
+        - Key: Name
+          Value: privateRouteTable
+  efsVpcSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref privateSubnet
+      RouteTableId: !Ref privateRouteTable
+
+Outputs:
+  dempVpcId:
+    Description: Demo VPC id
+    Value: !Ref demoVpc
+    Export:
+      Name: !Sub "${AWS::StackName}-demo-vpc-id"
+  privateRouteTableId:
+    Description: Demo VPC's private route table id
+    Value: !Ref privateRouteTable
+    Export:
+      Name: !Sub "${AWS::StackName}-private-route-table-id"
+  privateSubnetId:
+    Description: Demo VPC private subnet id
+    Value: !Ref privateSubnet
+    Export:
+      Name: !Sub "${AWS::StackName}-private-subnet-id"
+  demoVpcDefaultSecurityGroupId:
+    Description: VPC Security Group id
+    Value: !GetAtt demoVpc.DefaultSecurityGroup
+    Export:
+      Name: !Sub "${AWS::StackName}-vpc-default-sg-id"

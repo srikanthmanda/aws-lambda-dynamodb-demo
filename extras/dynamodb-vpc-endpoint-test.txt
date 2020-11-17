@@ -1,0 +1,104 @@
+$ aws-lambda-dynamodb-demo > ./scripts/2-test.sh
+Lambda functions: dynamoDbWriter dynamoDbReader
+Choose a lambda function: dynamoDbReader
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+Lambda functions: dynamoDbWriter dynamoDbReader
+Choose a lambda function: ^C
+$ aws-lambda-dynamodb-demo > aws ec2 describe-vpc-endpoints
+{
+    "VpcEndpoints": [
+        {
+            "VpcEndpointId": "vpce-<redacted-old-vpce-id>",
+            "VpcEndpointType": "Gateway",
+            "VpcId": "vpc-<redacted-vpc-id>",
+            "ServiceName": "com.amazonaws.us-east-1.dynamodb",
+            "State": "available",
+            "PolicyDocument": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
+            "RouteTableIds": [
+                "rtb-<redacted-route-table-id>"
+            ],
+            "SubnetIds": [],
+            "Groups": [],
+            "PrivateDnsEnabled": false,
+            "RequesterManaged": false,
+            "NetworkInterfaceIds": [],
+            "DnsEntries": [],
+            "CreationTimestamp": "2020-11-17T17:37:52+00:00",
+            "Tags": [],
+            "OwnerId": "<redacted-acct-id>"
+        }
+    ]
+}
+$ aws-lambda-dynamodb-demo > aws ec2 delete-vpc-endpoints --vpc-endpoint-ids vpce-<redacted-old-vpce-id>
+{
+    "Unsuccessful": []
+}
+$ aws-lambda-dynamodb-demo > ./scripts/2-test.sh
+Lambda functions: dynamoDbWriter dynamoDbReader
+Choose a lambda function: dynamoDbReader
+
+Read timeout on endpoint URL: "https://lambda.us-east-1.amazonaws.com/2015-03-31/functions/dynamoDbReader/invocations"
+$ aws-lambda-dynamodb-demo > aws ec2 describe-vpc-endpoints
+{
+    "VpcEndpoints": []
+}
+$ aws-lambda-dynamodb-demo > aws ec2 create-vpc-endpoint --vpc-id vpc-<redacted-vpc-id> --service-name com.amazonaws.us-east-1.dynamodb --route-table-ids rtb-<redacted-route-table-id>
+{
+    "VpcEndpoint": {
+        "VpcEndpointId": "vpce-<redacted-new-vpce-id>",
+        "VpcEndpointType": "Gateway",
+        "VpcId": "vpc-<redacted-vpc-id>",
+        "ServiceName": "com.amazonaws.us-east-1.dynamodb",
+        "State": "available",
+        "PolicyDocument": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
+        "RouteTableIds": [
+            "rtb-<redacted-route-table-id>"
+        ],
+        "SubnetIds": [],
+        "Groups": [],
+        "PrivateDnsEnabled": false,
+        "RequesterManaged": false,
+        "NetworkInterfaceIds": [],
+        "DnsEntries": [],
+        "CreationTimestamp": "2020-11-17T17:51:53+00:00",
+        "OwnerId": "<redacted-acct-id>"
+    }
+}
+$ aws-lambda-dynamodb-demo > aws ec2 describe-vpc-endpoints
+{
+    "VpcEndpoints": [
+        {
+            "VpcEndpointId": "vpce-<redacted-new-vpce-id>",
+            "VpcEndpointType": "Gateway",
+            "VpcId": "vpc-<redacted-vpc-id>",
+            "ServiceName": "com.amazonaws.us-east-1.dynamodb",
+            "State": "available",
+            "PolicyDocument": "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
+            "RouteTableIds": [
+                "rtb-<redacted-route-table-id>"
+            ],
+            "SubnetIds": [],
+            "Groups": [],
+            "PrivateDnsEnabled": false,
+            "RequesterManaged": false,
+            "NetworkInterfaceIds": [],
+            "DnsEntries": [],
+            "CreationTimestamp": "2020-11-17T17:51:53+00:00",
+            "Tags": [],
+            "OwnerId": "<redacted-acct-id>"
+        }
+    ]
+}
+$ aws-lambda-dynamodb-demo > ./scripts/2-test.sh
+Lambda functions: dynamoDbWriter dynamoDbReader
+Choose a lambda function: dynamoDbReader
+{
+    "StatusCode": 200,
+    "ExecutedVersion": "$LATEST"
+}
+Lambda functions: dynamoDbWriter dynamoDbReader
+Choose a lambda function: ^C
+$ aws-lambda-dynamodb-demo >

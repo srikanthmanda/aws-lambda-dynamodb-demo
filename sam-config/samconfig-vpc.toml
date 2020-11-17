@@ -1,0 +1,9 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "lambdas-vpc"
+s3_prefix = "lambdas-vpc"
+region = "us-east-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"

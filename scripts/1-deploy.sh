@@ -10,6 +10,11 @@ cd $(dirname $0) && cd ..
 DIR_REPO_ROOT=$(pwd)
 DIR_SAM_CONFIG="${DIR_REPO_ROOT}/sam-config"
 
+echo "Creating VPC ..."
+sam deploy --s3-bucket ${SAM_S3_BUCKET} -t ${DIR_SAM_CONFIG}/template-vpc.yml --config-file ${DIR_SAM_CONFIG}/samconfig-vpc.toml
+test $? -eq 0 || (echo "VPC creation failed, exiting... " && exit 1)
+echo "VPC created."
+
 echo "Creating DynamoDB table ..."
 sam deploy --s3-bucket ${SAM_S3_BUCKET} -t ${DIR_SAM_CONFIG}/template-dynamodb.yml --config-file ${DIR_SAM_CONFIG}/samconfig-dynamodb.toml
 test $? -eq 0 || (echo "DynamoDB table creation failed, exiting... " && exit 1)
